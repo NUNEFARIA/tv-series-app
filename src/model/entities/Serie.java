@@ -97,7 +97,7 @@ public class Serie {
         return name;
     }
     
-    public String details() {
+    public String toStrigDetails() {
         
         final StringBuilder sb = new StringBuilder("Serie{");
         
