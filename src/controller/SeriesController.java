@@ -3,6 +3,7 @@ package controller;
 import model.entities.Serie;
 import model.entities.UserData;
 import repository.UserRepository;
+import service.SeriesSortingService;
 import service.TvMazeAPIService;
 import service.UserService;
 
@@ -13,6 +14,7 @@ public class SeriesController {
 
     private final TvMazeAPIService apiService;
     private final UserService userService;
+    private final SeriesSortingService sortingService;
 
     public SeriesController() throws IOException {
 
@@ -20,6 +22,8 @@ public class SeriesController {
 
         this.userService = new UserService(new UserRepository()
         );
+
+        this.sortingService = new SeriesSortingService();
 
     }
 
@@ -43,7 +47,7 @@ public class SeriesController {
         this.userService.removeFavorite(serie);
     }
 
-    public List<Serie> getFavorites() {
+    public List<Serie> getFavorite() {
 
         return userService.getFavorites();
     }
@@ -88,5 +92,22 @@ public class SeriesController {
     public UserData getUserData() {
 
         return userService.getUserData();
+    }
+
+    /// Sort Series
+    public List<Serie> sortByName(List<Serie> series) {
+        return sortingService.sortByName(series);
+    }
+
+    public List<Serie> sortByRating(List<Serie> series) {
+        return sortingService.sortByRating(series);
+    }
+
+    public List<Serie> sortByStatus(List<Serie> series) {
+        return sortingService.sortByStatus(series);
+    }
+
+    public List<Serie> sortByPremiered(List<Serie> series) {
+        return sortingService.sortByPremiered(series);
     }
 }
