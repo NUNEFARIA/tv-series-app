@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import controller.SeriesController;
 import model.entities.Serie;
 import model.entities.User;
 import model.entities.UserData;
@@ -12,13 +13,13 @@ public class Main {
     
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        UserRepository repository =
-                new UserRepository();
+        SeriesController controller =
+                new SeriesController();
 
-        UserData loaded =
-                repository.load();
+        List<Serie> results =
+                controller.searchSeries("Breaking Bad");
 
-        System.out.println(loaded);
+        System.out.println(results.get(0));
         
     }
     
