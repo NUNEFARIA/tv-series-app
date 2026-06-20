@@ -2,9 +2,9 @@ package model.dtos;
 
 public class RatingDTO {
 
-    private Double avarage;
+    private Double average;
 
-    public Double getAvarage() {
-        return avarage;
+    public Double getAverage() {
+        return average;
     }
 }

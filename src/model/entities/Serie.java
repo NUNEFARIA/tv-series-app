@@ -12,11 +12,11 @@ public class Serie {
     private List<String> genres;
     private float average;
     private String status;
-    private LocalDate premiered;
-    private LocalDate ended;
+    private String premiered;
+    private String ended;
     private String broadcaster;
     
-    public Serie() {
+    public Serie(int id) {
         genres = new ArrayList<>();
     }
     
@@ -44,11 +44,11 @@ public class Serie {
         return status;
     }
     
-    public LocalDate getPremiered() {
+    public String getPremiered() {
         return premiered;
     }
     
-    public LocalDate getEnded() {
+    public String getEnded() {
         return ended;
     }
     
@@ -60,11 +60,11 @@ public class Serie {
         this.broadcaster = broadcaster;
     }
     
-    public void setEnded(LocalDate ended) {
+    public void setEnded(String ended) {
         this.ended = ended;
     }
     
-    public void setPremiered(LocalDate premiered) {
+    public void setPremiered(String premiered) {
         this.premiered = premiered;
     }
     
