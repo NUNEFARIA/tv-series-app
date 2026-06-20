@@ -11,13 +11,16 @@ public class User {
     public String getNickName() {
         return nickName;
     }
-    
+
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
-    
+
     @Override
     public String toString() {
         return nickName;
+    }
+
+    public void setNickname(String gustavo) {
     }
 }

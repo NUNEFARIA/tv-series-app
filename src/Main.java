@@ -1,5 +1,8 @@
 import com.google.gson.Gson;
 import model.entities.Serie;
+import model.entities.User;
+import model.entities.UserData;
+import repository.UserRepository;
 import service.TvMazeAPIService;
 
 import java.io.IOException;
@@ -9,17 +12,13 @@ public class Main {
     
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        TvMazeAPIService api =
-                new TvMazeAPIService();
+        UserRepository repository =
+                new UserRepository();
 
-        List<Serie> series =
-                api.searchSeries("Breaking Bad");
+        UserData loaded =
+                repository.load();
 
-        for (Serie serie : series) {
-
-            System.out.println(serie);
-
-        }
+        System.out.println(loaded);
         
     }
     
