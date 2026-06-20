@@ -5,6 +5,7 @@ import model.entities.User;
 import model.entities.UserData;
 import repository.UserRepository;
 import service.TvMazeAPIService;
+import view.MainFrame;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,13 +14,15 @@ public class Main {
     
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        SeriesController controller =
-                new SeriesController();
+        try {
 
-        List<Serie> results =
-                controller.searchSeries("Breaking Bad");
+            new MainFrame();
 
-        System.out.println(results.get(0));
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
         
     }
     
