@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
     private JPanel searchPanel;
     private JPanel actionsPanel;
     private JTabbedPane tabbedPane;
-
+    private JButton removeButton;
     private DefaultListModel<Serie> favoritesModel;
     private DefaultListModel<Serie> watchedModel;
     private DefaultListModel<Serie> wantToWatchModel;
@@ -91,17 +91,18 @@ public class MainFrame extends JFrame {
     }
 
     private void addActionButtons() {
+
         this.favoriteButton = new JButton("Favorito");
-
         this.watchedButton = new JButton("Assistido");
-
         this.wantToWatchButton = new JButton("Quero Assistir");
+        this.removeButton = new JButton("Remover");
 
         this.actionsPanel = new JPanel();
 
         this.actionsPanel.add(this.favoriteButton);
         this.actionsPanel.add(this.watchedButton);
         this.actionsPanel.add(this.wantToWatchButton);
+        this.actionsPanel.add(this.removeButton);
     }
 
     private void addTabs() {
@@ -164,6 +165,8 @@ public class MainFrame extends JFrame {
         this.configureWatchedEvent();
 
         this.configureWantToWatchEvent();
+
+        this.configureRemoveEvent();
     }
 
     private void configureSearchEvent() {
@@ -308,6 +311,26 @@ public class MainFrame extends JFrame {
 
     }
 
+    private void configureRemoveEvent() {
+
+        this.removeButton.addActionListener(e -> {
+
+            try {
+
+                removeSelectedSerie();
+
+            } catch (Exception exception) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        exception.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        });
+    }
+
     private void searchSeries()
             throws IOException, InterruptedException {
 
@@ -375,6 +398,75 @@ public class MainFrame extends JFrame {
 
             wantToWatchModel.addElement(serie);
         }
+    }
+
+    private void removeSelectedSerie()
+            throws IOException {
+
+        int selectedTab =
+                this.tabbedPane.getSelectedIndex();
+
+        Serie selected = null;
+
+        switch (selectedTab) {
+
+            case 0:
+
+                selected =
+                        this.favoritesList.getSelectedValue();
+
+                if (selected != null) {
+
+                    controller.removeFavorite(selected);
+
+                    refreshFavorites();
+                }
+
+                break;
+
+            case 1:
+
+                selected =
+                        this.watchedList.getSelectedValue();
+
+                if (selected != null) {
+
+                    controller.removeWatched(selected);
+
+                    refreshWatched();
+                }
+
+                break;
+
+            case 2:
+
+                selected =
+                        this.wantToWatchList.getSelectedValue();
+
+                if (selected != null) {
+
+                    controller.removeWantToWatch(selected);
+
+                    refreshWantToWatch();
+                }
+
+                break;
+        }
+
+        if (selected == null) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione uma série para remover."
+            );
+
+            return;
+        }
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Série removida."
+        );
     }
 
 }
