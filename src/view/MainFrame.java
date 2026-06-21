@@ -196,6 +196,8 @@ public class MainFrame extends JFrame {
         this.configureWantToWatchEvent();
 
         this.configureRemoveEvent();
+
+        this.configureSeriesDetailsEvent();
     }
 
     private void configureSearchEvent() {
@@ -495,6 +497,34 @@ public class MainFrame extends JFrame {
         JOptionPane.showMessageDialog(
                 this,
                 "Série removida."
+        );
+    }
+
+    private void configureSeriesDetailsEvent() {
+
+        this.resultsList.addMouseListener(
+                new java.awt.event.MouseAdapter() {
+
+                    @Override
+                    public void mouseClicked(
+                            java.awt.event.MouseEvent e
+                    ) {
+
+                        if (e.getClickCount() == 2) {
+
+                            Serie selected =
+                                    resultsList.getSelectedValue();
+
+                            if (selected != null) {
+
+                                new SerieDetailsDialog(
+                                        MainFrame.this,
+                                        selected
+                                ).setVisible(true);
+                            }
+                        }
+                    }
+                }
         );
     }
 

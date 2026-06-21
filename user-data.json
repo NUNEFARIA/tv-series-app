@@ -2,7 +2,21 @@
   "user": {
     "nickName": "NUNES"
   },
-  "favorites": [],
+  "favorites": [
+    {
+      "id": 0,
+      "name": "MasterChef Profissionais Brasil",
+      "language": "Portuguese",
+      "genres": [
+        "Food"
+      ],
+      "average": 0.0,
+      "status": "Ended",
+      "premiered": "2016-10-04",
+      "ended": "2018-12-12",
+      "broadcaster": "Rede Bandeirantes"
+    }
+  ],
   "wantToWatch": [],
   "watched": []
 }
