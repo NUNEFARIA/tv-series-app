@@ -17,6 +17,21 @@
       "premiered": "2008-01-20",
       "ended": "2019-10-11",
       "broadcaster": "AMC"
+    },
+    {
+      "id": 0,
+      "name": "Good vs Evil",
+      "language": "English",
+      "genres": [
+        "Comedy",
+        "Action",
+        "Science-Fiction"
+      ],
+      "average": 0.0,
+      "status": "Ended",
+      "premiered": "1999-07-18",
+      "ended": "2000-05-12",
+      "broadcaster": "Syfy"
     }
   ],
   "wantToWatch": [],

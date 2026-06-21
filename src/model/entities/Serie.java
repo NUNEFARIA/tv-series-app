@@ -96,6 +96,23 @@ public class Serie {
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+
+        if (!(o instanceof Serie)) return false;
+
+        Serie serie = (Serie) o;
+
+        return id == serie.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
     
     public String toStrigDetails() {
         
