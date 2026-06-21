@@ -5,6 +5,7 @@ import model.entities.Serie;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.List;
 
 public class MainFrame extends JFrame {
 
@@ -22,21 +23,33 @@ public class MainFrame extends JFrame {
     private JPanel actionsPanel;
     private JTabbedPane tabbedPane;
 
+    private DefaultListModel<Serie> favoritesModel;
+    private DefaultListModel<Serie> watchedModel;
+    private DefaultListModel<Serie> wantToWatchModel;
+
+    private JList<Serie> favoritesList;
+    private JList<Serie> watchedList;
+    private JList<Serie> wantToWatchList;
+
     public MainFrame() throws IOException {
 
         this.controller = new SeriesController();
 
         this.initializeComponents();
 
-        addTopPanel();
+        this.addTopPanel();
 
-        addResultList();
+        this.addResultList();
 
-        addActionButtons();
+        this.addActionButtons();
 
-        addTabs();
+        this.addTabs();
 
-        assembleLayout();
+        this.refreshLists();
+
+        this.assembleLayout();
+
+        this.configureEvents();
 
         setVisible(true);
     }
@@ -92,21 +105,40 @@ public class MainFrame extends JFrame {
     }
 
     private void addTabs() {
+
         this.tabbedPane = new JTabbedPane();
+
+        this.favoritesModel =
+                new DefaultListModel<>();
+
+        this.favoritesList =
+                new JList<>(favoritesModel);
 
         this.tabbedPane.addTab(
                 "Favoritos",
-                new JPanel()
+                new JScrollPane(favoritesList)
         );
+
+        this.watchedModel =
+                new DefaultListModel<>();
+
+        this.watchedList =
+                new JList<>(watchedModel);
 
         this.tabbedPane.addTab(
                 "Assistidos",
-                new JPanel()
+                new JScrollPane(watchedList)
         );
+
+        this.wantToWatchModel =
+                new DefaultListModel<>();
+
+        this.wantToWatchList =
+                new JList<>(wantToWatchModel);
 
         this.tabbedPane.addTab(
                 "Quero Assistir",
-                new JPanel()
+                new JScrollPane(wantToWatchList)
         );
     }
 
@@ -121,6 +153,228 @@ public class MainFrame extends JFrame {
         add(this.resultsScrollPane);
         add(this.actionsPanel);
         add(this.tabbedPane);
+    }
+
+    private void configureEvents() {
+
+        this.configureSearchEvent();
+
+        this.configureFavoriteEvent();
+
+        this.configureWatchedEvent();
+
+        this.configureWantToWatchEvent();
+    }
+
+    private void configureSearchEvent() {
+
+        this.searchButton.addActionListener(e -> {
+
+            try {
+
+                searchSeries();
+
+            } catch (Exception exception) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        exception.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        });
+    }
+
+    private void configureFavoriteEvent() {
+
+        this.favoriteButton.addActionListener(e -> {
+
+            Serie selected =
+                    this.resultsList.getSelectedValue();
+
+            if (selected == null) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Selecione uma série."
+                );
+
+                return;
+            }
+
+            try {
+
+                this.controller.addFavorite(selected);
+
+                this.refreshFavorites();
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Série adicionada aos favoritos."
+                );
+
+            } catch (Exception exception) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        exception.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        });
+    }
+
+    private void configureWatchedEvent() {
+
+        this.watchedButton.addActionListener(e -> {
+
+            Serie selected =
+                    this.resultsList.getSelectedValue();
+
+            if (selected == null) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Selecione uma série."
+                );
+
+                return;
+            }
+
+            try {
+
+                this.controller.addWatched(selected);
+
+                this.refreshWatched();
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Série adicionada aos assistidos."
+                );
+
+            } catch (Exception exception) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        exception.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        });
+    }
+
+    private void configureWantToWatchEvent() {
+
+        this.wantToWatchButton.addActionListener(e -> {
+
+            Serie selected =
+                    this.resultsList.getSelectedValue();
+
+            if (selected == null) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Selecione uma série."
+                );
+
+                return;
+            }
+
+            try {
+
+                this.controller.addWantToWatch(selected);
+
+                this.refreshWantToWatch();
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Série adicionada à lista."
+                );
+
+            } catch (Exception exception) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        exception.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+
+        });
+
+    }
+
+    private void searchSeries()
+            throws IOException, InterruptedException {
+
+        String name =
+                this.searchField.getText().trim();
+
+        if (name.isEmpty()) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Digite o nome de uma série."
+            );
+
+            return;
+        }
+
+        List<Serie> series =
+                this.controller.searchSeries(name);
+
+        this.resultsModel.clear();
+
+        for (Serie serie : series) {
+
+            this.resultsModel.addElement(serie);
+        }
+    }
+
+    private void refreshLists() {
+
+        this.refreshFavorites();
+
+        this.refreshWatched();
+
+        this.refreshWantToWatch();
+    }
+
+    private void refreshFavorites() {
+
+        favoritesModel.clear();
+
+        for (Serie serie :
+                controller.getFavorite()) {
+
+            favoritesModel.addElement(serie);
+        }
+    }
+
+    private void refreshWatched() {
+
+        watchedModel.clear();
+
+        for (Serie serie :
+                controller.getWatched()) {
+
+            watchedModel.addElement(serie);
+        }
+    }
+
+    private void refreshWantToWatch() {
+
+        wantToWatchModel.clear();
+
+        for (Serie serie :
+                controller.getWantToWatch()) {
+
+            wantToWatchModel.addElement(serie);
+        }
     }
 
 }

@@ -2,7 +2,23 @@
   "user": {
     "nickName": "Gustavo"
   },
-  "favorites": [],
+  "favorites": [
+    {
+      "id": 0,
+      "name": "Breaking Bad",
+      "language": "English",
+      "genres": [
+        "Drama",
+        "Crime",
+        "Thriller"
+      ],
+      "average": 9.2,
+      "status": "Ended",
+      "premiered": "2008-01-20",
+      "ended": "2019-10-11",
+      "broadcaster": "AMC"
+    }
+  ],
   "wantToWatch": [],
   "watched": []
 }

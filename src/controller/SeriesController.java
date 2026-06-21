@@ -35,7 +35,7 @@ public class SeriesController {
     }
 
     /// Favorites
-    public void addFavorites(Serie serie)
+    public void addFavorite(Serie serie)
             throws IOException {
 
         this.userService.addFavorite(serie);
