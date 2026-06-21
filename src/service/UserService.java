@@ -1,6 +1,7 @@
 package service;
 
 import model.entities.Serie;
+import model.entities.User;
 import model.entities.UserData;
 import repository.UserRepository;
 
@@ -15,6 +16,16 @@ public class UserService {
     public UserService(UserRepository repository) throws IOException {
         this.repository = repository;
         this.userData = repository.load();
+    }
+
+    public void setNickname(String nickname)
+            throws IOException {
+
+        User user = new User(nickname);
+
+        this.userData.setUser(user);
+
+        this.persist();
     }
 
     private void persist() throws IOException {

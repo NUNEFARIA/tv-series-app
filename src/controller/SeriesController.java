@@ -27,6 +27,13 @@ public class SeriesController {
 
     }
 
+    ///  User
+    public void setNickname(String nickname)
+        throws IOException {
+
+        this.userService.setNickname(nickname);
+    }
+
     /// Search series
     public List<Serie> searchSeries(String name)
             throws IOException, InterruptedException {

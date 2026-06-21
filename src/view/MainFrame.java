@@ -35,6 +35,8 @@ public class MainFrame extends JFrame {
 
         this.controller = new SeriesController();
 
+        this.checkUser();
+
         this.initializeComponents();
 
         this.addTopPanel();
@@ -54,9 +56,36 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
+    private void checkUser() throws IOException {
+
+        if (this.controller.getUserData().getUser() == null) {
+
+            String nickname =
+                    NicknameDialog.askNickname();
+
+            if (nickname != null &&
+            !nickname.isBlank()) {
+
+                this.controller.setNickname(
+                        nickname.trim()
+                );
+            }
+        }
+    }
+
     private void initializeComponents() {
 
-        setTitle("TV Series APP");
+        String title = "TV Series APP";
+
+        if (controller.getUserData().getUser() != null) {
+
+            title += " - "
+                    + controller.getUserData()
+                    .getUser()
+                    .getNickName();
+        }
+
+        setTitle(title);
 
         setSize(1000, 700);
 
