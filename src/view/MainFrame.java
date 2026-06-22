@@ -34,6 +34,7 @@ public class MainFrame extends JFrame {
     private JLabel watchedCountLabel;
     private JLabel wantToWatchCountLabel;
     private JPanel statisticsPanel;
+    private JComboBox<String> sortComboBox;
 
     public MainFrame() throws IOException {
 
@@ -111,6 +112,15 @@ public class MainFrame extends JFrame {
 
         this.searchPanel.add(this.searchField);
         this.searchPanel.add(this.searchButton);
+
+        this.sortComboBox = new JComboBox<>(new String[] {
+                "Nome",
+                "Nota",
+                "Status",
+                "Estreia"
+        });
+
+        this.searchPanel.add(this.sortComboBox);
 
     }
 
@@ -205,6 +215,8 @@ public class MainFrame extends JFrame {
         this.configureRemoveEvent();
 
         this.configureSeriesDetailsEvent();
+
+        this.configureSortEvent();
     }
 
     private void configureSearchEvent() {
@@ -618,6 +630,99 @@ public class MainFrame extends JFrame {
                 "Quero Assistir: "
                         + controller.getWantToWatch().size()
         );
+    }
+
+    private void configureSortEvent() {
+
+        sortComboBox.addActionListener(
+                e -> sortCurrentTab()
+        );
+
+    }
+
+    private void sortCurrentTab() {
+
+        int tab = tabbedPane.getSelectedIndex();
+
+        String option =
+                (String) sortComboBox.getSelectedItem();
+
+        List<Serie> series;
+        List<Serie> sorted;
+
+        switch (tab) {
+
+            case 0:
+                series = controller.getFavorite();
+                break;
+
+            case 1:
+                series = controller.getWatched();
+                break;
+
+            case 2:
+                series = controller.getWantToWatch();
+                break;
+
+            default:
+                return;
+        }
+
+        switch (option) {
+
+            case "Nome":
+                sorted = controller.sortByName(series);
+                break;
+
+            case "Nota":
+                sorted = controller.sortByRating(series);
+                break;
+
+            case "Status":
+                sorted = controller.sortByStatus(series);
+                break;
+
+            case "Estreia":
+                sorted = controller.sortByPremiered(series);
+                break;
+
+            default:
+                return;
+        }
+
+        updateCurrentTab(sorted);
+
+    }
+
+    private void updateCurrentTab(List<Serie> series) {
+
+        int tab = tabbedPane.getSelectedIndex();
+
+        DefaultListModel<Serie> model;
+
+        switch (tab) {
+
+            case 0:
+                model = favoritesModel;
+                break;
+
+            case 1:
+                model = watchedModel;
+                break;
+
+            case 2:
+                model = wantToWatchModel;
+                break;
+
+            default:
+                return;
+        }
+
+        model.clear();
+
+        for (Serie serie : series) {
+            model.addElement(serie);
+        }
     }
 
 }

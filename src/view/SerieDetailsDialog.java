@@ -12,7 +12,11 @@ public class SerieDetailsDialog extends JDialog {
             Serie serie
     ) {
 
-        super(parent, "Detalhes da Série", true);
+        super(
+                parent,
+                "Detalhes da Série",
+                true
+        );
 
         setSize(500,400);
 

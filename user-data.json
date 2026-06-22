@@ -2,7 +2,63 @@
   "user": {
     "nickName": "NUNES"
   },
-  "favorites": [],
+  "favorites": [
+    {
+      "id": 62998,
+      "name": "Gen V",
+      "language": "English",
+      "genres": [
+        "Comedy",
+        "Action",
+        "Science-Fiction"
+      ],
+      "average": 7.3,
+      "status": "Ended",
+      "premiered": "2023-09-29",
+      "ended": "2025-10-22"
+    },
+    {
+      "id": 24791,
+      "name": "Dr. G: Medical Examiner",
+      "language": "English",
+      "genres": [
+        "Medical"
+      ],
+      "average": 0.0,
+      "status": "Ended",
+      "premiered": "2004-07-23",
+      "ended": "2012-02-10",
+      "broadcaster": "Discovery"
+    },
+    {
+      "id": 20613,
+      "name": "G-Spot",
+      "language": "English",
+      "genres": [
+        "Comedy"
+      ],
+      "average": 0.0,
+      "status": "Ended",
+      "premiered": "2005-04-25",
+      "ended": "2009-05-20",
+      "broadcaster": "Showcase"
+    },
+    {
+      "id": 5620,
+      "name": "Cardfight!! Vanguard",
+      "language": "Japanese",
+      "genres": [
+        "Action",
+        "Anime",
+        "Fantasy",
+        "Science-Fiction"
+      ],
+      "average": 0.0,
+      "status": "Running",
+      "premiered": "2011-01-08",
+      "broadcaster": "TV Tokyo"
+    }
+  ],
   "wantToWatch": [],
   "watched": []
 }

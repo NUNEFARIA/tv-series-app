@@ -17,7 +17,8 @@ public class Serie {
     private String broadcaster;
     
     public Serie(int id) {
-        genres = new ArrayList<>();
+        this.id = id;
+        this.genres = new ArrayList<>();
     }
     
     public int getId() {

@@ -2,6 +2,7 @@ package service;
 
 import model.entities.Serie;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -9,46 +10,58 @@ public class SeriesSortingService {
 
     public List<Serie> sortByName(List<Serie> series) {
 
-        series.sort(
+        List<Serie> sorted =
+                new ArrayList<>(series);
+
+        sorted.sort(
                 Comparator.comparing(
                 Serie::getName,
                 String.CASE_INSENSITIVE_ORDER
                 )
         );
 
-        return series;
+        return sorted;
     }
 
     public List<Serie> sortByRating(List<Serie> series) {
 
-        series.sort(
+        List<Serie> sorted =
+                new ArrayList<>(series);
+
+        sorted.sort(
                 Comparator.comparing(
                         Serie::getAverage
                 ).reversed()
         );
 
-        return series;
+        return sorted;
     }
 
     public List<Serie> sortByPremiered(List<Serie> series) {
 
-        series.sort(
+        List<Serie> sorted =
+                new ArrayList<>(series);
+
+        sorted.sort(
                 Comparator.comparing(
                         Serie::getPremiered
                 )
         );
 
-        return series;
+        return sorted;
     }
 
     public List<Serie> sortByStatus(List<Serie> series) {
 
-        series.sort(
+        List<Serie> sorted =
+                new ArrayList<>(series);
+
+        sorted.sort(
                 Comparator.comparing(
                         Serie::getStatus
                 )
         );
 
-        return series;
+        return sorted;
     }
 }
