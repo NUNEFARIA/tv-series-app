@@ -26,10 +26,14 @@ public class MainFrame extends JFrame {
     private DefaultListModel<Serie> favoritesModel;
     private DefaultListModel<Serie> watchedModel;
     private DefaultListModel<Serie> wantToWatchModel;
-
     private JList<Serie> favoritesList;
     private JList<Serie> watchedList;
     private JList<Serie> wantToWatchList;
+    private JLabel userLabel;
+    private JLabel favoritesCountLabel;
+    private JLabel watchedCountLabel;
+    private JLabel wantToWatchCountLabel;
+    private JPanel statisticsPanel;
 
     public MainFrame() throws IOException {
 
@@ -40,6 +44,8 @@ public class MainFrame extends JFrame {
         this.initializeComponents();
 
         this.addTopPanel();
+
+        this.addStatisticsPanel();
 
         this.addResultList();
 
@@ -180,6 +186,7 @@ public class MainFrame extends JFrame {
         ));
 
         add(this.searchPanel);
+        add(this.statisticsPanel);
         add(this.resultsScrollPane);
         add(this.actionsPanel);
         add(this.tabbedPane);
@@ -396,6 +403,9 @@ public class MainFrame extends JFrame {
         this.refreshWatched();
 
         this.refreshWantToWatch();
+
+        this.refreshUserStatistics();
+
     }
 
     private void refreshFavorites() {
@@ -407,6 +417,9 @@ public class MainFrame extends JFrame {
 
             favoritesModel.addElement(serie);
         }
+
+        this.refreshFavoritesStatistics();
+
     }
 
     private void refreshWatched() {
@@ -418,6 +431,8 @@ public class MainFrame extends JFrame {
 
             watchedModel.addElement(serie);
         }
+
+        this.refreshWatchedStatistics();
     }
 
     private void refreshWantToWatch() {
@@ -429,6 +444,8 @@ public class MainFrame extends JFrame {
 
             wantToWatchModel.addElement(serie);
         }
+
+        this.refreshWantToWatchStatistics();
     }
 
     private void removeSelectedSerie()
@@ -525,6 +542,81 @@ public class MainFrame extends JFrame {
                         }
                     }
                 }
+        );
+    }
+
+    private void addStatisticsPanel() {
+
+        this.statisticsPanel = new JPanel();
+
+        this.userLabel = new JLabel();
+
+        this.favoritesCountLabel = new JLabel();
+
+        this.watchedCountLabel = new JLabel();
+
+        this.wantToWatchCountLabel = new JLabel();
+
+        this.statisticsPanel.add(userLabel);
+
+        this.statisticsPanel.add(
+                new JLabel(" | ")
+        );
+
+        this.statisticsPanel.add(
+                favoritesCountLabel
+        );
+
+        this.statisticsPanel.add(
+                new JLabel(" | ")
+        );
+
+        this.statisticsPanel.add(
+                watchedCountLabel
+        );
+
+        this.statisticsPanel.add(
+                new JLabel(" | ")
+        );
+
+        this.statisticsPanel.add(
+                wantToWatchCountLabel
+        );
+    }
+
+    private void refreshUserStatistics () {
+
+        String nickname = controller
+                .getUserData()
+                .getUser()
+                .getNickName();
+
+        userLabel.setText(
+                "Usuário: " + nickname
+        );
+    }
+
+    private void refreshFavoritesStatistics () {
+
+        favoritesCountLabel.setText(
+                "Favoritos: "
+                        + controller.getFavorite().size()
+        );
+    }
+
+    private void refreshWatchedStatistics () {
+
+        watchedCountLabel.setText(
+                "Assistidos: "
+                        + controller.getWatched().size()
+        );
+    }
+
+    private void refreshWantToWatchStatistics () {
+
+        wantToWatchCountLabel.setText(
+                "Quero Assistir: "
+                        + controller.getWantToWatch().size()
         );
     }
 
