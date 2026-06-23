@@ -35,6 +35,8 @@ public class MainFrame extends JFrame {
     private JLabel wantToWatchCountLabel;
     private JPanel statisticsPanel;
     private JComboBox<String> sortComboBox;
+    private JMenuItem changeNicknameItem;
+    private JMenuItem aboutItem;
 
     public MainFrame() throws IOException {
 
@@ -43,6 +45,8 @@ public class MainFrame extends JFrame {
         this.checkUser();
 
         this.initializeComponents();
+
+        this.addMenuBar();
 
         this.addTopPanel();
 
@@ -217,6 +221,10 @@ public class MainFrame extends JFrame {
         this.configureSeriesDetailsEvent();
 
         this.configureSortEvent();
+
+        this.configureNickname();
+
+        this.configureAboutEvent();
     }
 
     private void configureSearchEvent() {
@@ -378,6 +386,46 @@ public class MainFrame extends JFrame {
                         JOptionPane.ERROR_MESSAGE
                 );
             }
+        });
+    }
+
+    private void configureNickname() {
+
+        this.changeNicknameItem
+                .addActionListener(
+                        e -> {
+                            try {
+
+                                changeNickname();
+
+                            } catch (Exception exception) {
+
+                                JOptionPane.showMessageDialog(
+                                        this,
+                                        exception.getMessage(),
+                                        "Erro",
+                                        JOptionPane.ERROR_MESSAGE
+                                );
+                            }
+                        }
+                );
+    }
+
+    private  void configureAboutEvent() {
+
+        this.aboutItem.addActionListener(e -> {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    """
+                            
+                            TV Series APP
+                            
+                            Projeto acadêmico em Java Swing.
+                            Dados obtidos pela API TVMaze.
+                            
+                            """
+            );
         });
     }
 
@@ -723,6 +771,57 @@ public class MainFrame extends JFrame {
         for (Serie serie : series) {
             model.addElement(serie);
         }
+    }
+
+    private void addMenuBar() {
+
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu userMenu = new JMenu("Usuário");
+
+        this.changeNicknameItem =
+                new JMenuItem("Alterar Nickname");
+
+        userMenu.add(changeNicknameItem);
+
+        JMenu helpMenu = new JMenu("Ajuda");
+
+        this.aboutItem =
+                new JMenuItem("Sobre");
+
+        helpMenu.add(aboutItem);
+
+        menuBar.add(userMenu);
+        menuBar.add(helpMenu);
+
+        setJMenuBar(menuBar);
+    }
+
+    private void changeNickname()
+            throws IOException {
+
+        String nickname =
+                JOptionPane.showInputDialog(
+                        this,
+                        "Novo nickname: "
+                );
+
+        if (nickname == null ||
+        nickname.isBlank()) {
+
+            return;
+        }
+
+        this.controller.setNickname(
+                nickname.trim()
+        );
+
+        refreshUserStatistics();
+
+        setTitle(
+                "TV Series APP - "
+                + nickname.trim()
+        );
     }
 
 }
