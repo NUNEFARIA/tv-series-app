@@ -44,7 +44,8 @@ public class SeriesSortingService {
 
         sorted.sort(
                 Comparator.comparing(
-                        Serie::getPremiered
+                        Serie::getPremiered,
+                        Comparator.nullsLast(String::compareTo)
                 )
         );
 
