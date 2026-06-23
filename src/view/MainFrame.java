@@ -192,6 +192,33 @@ public class MainFrame extends JFrame {
         );
     }
 
+    private void addDetailEvent(JList<Serie> list) {
+
+        list.addMouseListener(
+                new java.awt.event.MouseAdapter() {
+
+                    @Override
+                    public void mouseClicked(
+                            java.awt.event.MouseEvent e
+                    ) {
+
+                        if (e.getClickCount() == 2) {
+
+                            Serie selected = list.getSelectedValue();
+
+                            if (selected != null) {
+
+                                new SerieDetailsDialog(
+                                        MainFrame.this,
+                                        selected
+                                ).setVisible(true);
+                            }
+                        }
+                    }
+                }
+        );
+    }
+
     private void assembleLayout() {
 
         setLayout(new BoxLayout(
@@ -579,30 +606,11 @@ public class MainFrame extends JFrame {
 
     private void configureSeriesDetailsEvent() {
 
-        this.resultsList.addMouseListener(
-                new java.awt.event.MouseAdapter() {
+        this.addDetailEvent(resultsList);
+        this.addDetailEvent(favoritesList);
+        this.addDetailEvent(watchedList);
+        this.addDetailEvent(wantToWatchList);
 
-                    @Override
-                    public void mouseClicked(
-                            java.awt.event.MouseEvent e
-                    ) {
-
-                        if (e.getClickCount() == 2) {
-
-                            Serie selected =
-                                    resultsList.getSelectedValue();
-
-                            if (selected != null) {
-
-                                new SerieDetailsDialog(
-                                        MainFrame.this,
-                                        selected
-                                ).setVisible(true);
-                            }
-                        }
-                    }
-                }
-        );
     }
 
     private void addStatisticsPanel() {

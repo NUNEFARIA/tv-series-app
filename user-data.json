@@ -1,6 +1,6 @@
 {
   "user": {
-    "nickName": "Gustavo"
+    "nickName": "NUNES"
   },
   "favorites": [
     {
@@ -18,45 +18,17 @@
       "ended": "2025-10-22"
     },
     {
-      "id": 24791,
-      "name": "Dr. G: Medical Examiner",
-      "language": "English",
+      "id": 57257,
+      "name": "Brak",
+      "language": "Dutch",
       "genres": [
-        "Medical"
-      ],
-      "average": 0.0,
-      "status": "Ended",
-      "premiered": "2004-07-23",
-      "ended": "2012-02-10",
-      "broadcaster": "Discovery"
-    },
-    {
-      "id": 20613,
-      "name": "G-Spot",
-      "language": "English",
-      "genres": [
+        "Drama",
         "Comedy"
       ],
       "average": 0.0,
       "status": "Ended",
-      "premiered": "2005-04-25",
-      "ended": "2009-05-20",
-      "broadcaster": "Showcase"
-    },
-    {
-      "id": 5620,
-      "name": "Cardfight!! Vanguard",
-      "language": "Japanese",
-      "genres": [
-        "Action",
-        "Anime",
-        "Fantasy",
-        "Science-Fiction"
-      ],
-      "average": 0.0,
-      "status": "Running",
-      "premiered": "2011-01-08",
-      "broadcaster": "TV Tokyo"
+      "premiered": "2020-09-09",
+      "ended": "2020-12-10"
     }
   ],
   "wantToWatch": [],
