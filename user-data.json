@@ -1,36 +1,8 @@
 {
   "user": {
-    "nickName": "NUNES"
+    "nickName": "Nunes"
   },
-  "favorites": [
-    {
-      "id": 62998,
-      "name": "Gen V",
-      "language": "English",
-      "genres": [
-        "Comedy",
-        "Action",
-        "Science-Fiction"
-      ],
-      "average": 7.3,
-      "status": "Ended",
-      "premiered": "2023-09-29",
-      "ended": "2025-10-22"
-    },
-    {
-      "id": 57257,
-      "name": "Brak",
-      "language": "Dutch",
-      "genres": [
-        "Drama",
-        "Comedy"
-      ],
-      "average": 0.0,
-      "status": "Ended",
-      "premiered": "2020-09-09",
-      "ended": "2020-12-10"
-    }
-  ],
+  "favorites": [],
   "wantToWatch": [],
   "watched": []
 }

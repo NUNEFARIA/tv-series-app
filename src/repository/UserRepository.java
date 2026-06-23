@@ -29,10 +29,24 @@ public class UserRepository {
         try (FileReader reader =
                      new FileReader(file)) {
 
-            return gson.fromJson(
-                    reader,
-                    UserData.class
+            UserData userData =
+                    gson.fromJson(
+                        reader,
+                        UserData.class
+                    );
+
+            return userData != null
+                    ? userData
+                    : new UserData();
+
+        } catch (Exception exception) {
+
+            System.out.println(
+                    "Arquivo JSON inválido. " +
+                            "Criando novo usuário."
             );
+
+            return new UserData();
         }
     }
 
