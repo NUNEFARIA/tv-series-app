@@ -644,15 +644,18 @@ public class MainFrame extends JFrame {
         );
     }
 
-    private void refreshUserStatistics () {
+    private void refreshUserStatistics() {
 
-        String nickname = controller
-                .getUserData()
-                .getUser()
-                .getNickName();
+        if (controller.getUserData().getUser() == null) {
+            userLabel.setText("Usuário: Anônimo");
+            return;
+        }
 
         userLabel.setText(
-                "Usuário: " + nickname
+                "Usuário: "
+                        + controller.getUserData()
+                        .getUser()
+                        .getNickName()
         );
     }
 
