@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 
+/// Pede o nome do usuário em seu primeiro acesso
 public class NicknameDialog {
 
     public static String askNickname() {

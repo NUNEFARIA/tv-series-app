@@ -5,6 +5,7 @@ import model.entities.Serie;
 import javax.swing.*;
 import java.awt.*;
 
+/// Exibe os detalhes de uma série
 public class SerieDetailsDialog extends JDialog {
 
     public SerieDetailsDialog(

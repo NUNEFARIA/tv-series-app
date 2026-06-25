@@ -41,10 +41,8 @@ public class MainFrame extends JFrame {
     /// Constructor
     public MainFrame() throws IOException {
 
-        // Instacía backand
         this.controller = new SeriesController();
 
-        // Checa se usuário existe
         this.checkUser();
 
         this.initializeComponents();
@@ -88,6 +86,7 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /// Configura a o frame
     private void initializeComponents() {
 
         String title = "TV Series APP";
@@ -102,6 +101,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Adiciona a área para pesquisa e e caixa de ordenação
     private void addTopPanel() {
 
         this.searchPanel = new JPanel();
@@ -124,6 +124,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Adiciona a lista de resultados da pesquisa
     private void addResultList() {
 
         this.resultsModel = new DefaultListModel<>();
@@ -134,7 +135,7 @@ public class MainFrame extends JFrame {
                 new JScrollPane(this.resultsList);
 
     }
-
+    /// Adiciona os botões para adicionar e remover series do usuário
     private void addActionButtons() {
 
         this.favoriteButton = new JButton("Favorito");
@@ -150,6 +151,7 @@ public class MainFrame extends JFrame {
         this.actionsPanel.add(this.removeButton);
     }
 
+    /// Adicona abas para as séries do usuário
     private void addTabs() {
 
         this.tabbedPane = new JTabbedPane();
@@ -188,6 +190,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Exibe detlhes da serie quando está sofrer duplo click
     private void addDetailEvent(JList<Serie> list) {
 
         list.addMouseListener(
@@ -215,6 +218,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Adiciona os elementos que compoem o layout
     private void assembleLayout() {
 
         setLayout(new BoxLayout(
@@ -229,6 +233,7 @@ public class MainFrame extends JFrame {
         add(this.tabbedPane);
     }
 
+    /// Configura todas as ações que poden ser feitas durante a esecução
     private void configureEvents() {
 
         this.configureSearchEvent();
@@ -250,6 +255,7 @@ public class MainFrame extends JFrame {
         this.configureAboutEvent();
     }
 
+    /// Pesquisa serie
     private void configureSearchEvent() {
 
         this.searchButton.addActionListener(e -> {
@@ -270,6 +276,7 @@ public class MainFrame extends JFrame {
         });
     }
 
+    /// Adiciona série aos favoritos
     private void configureFavoriteEvent() {
 
         this.favoriteButton.addActionListener(e -> {
@@ -310,6 +317,7 @@ public class MainFrame extends JFrame {
         });
     }
 
+    /// Adiciona série aos assistidos
     private void configureWatchedEvent() {
 
         this.watchedButton.addActionListener(e -> {
@@ -350,6 +358,7 @@ public class MainFrame extends JFrame {
         });
     }
 
+    /// Adiciona série aos quero assistir
     private void configureWantToWatchEvent() {
 
         this.wantToWatchButton.addActionListener(e -> {
@@ -392,6 +401,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Remove série da coleção onde ela estiver
     private void configureRemoveEvent() {
 
         this.removeButton.addActionListener(e -> {
@@ -412,6 +422,7 @@ public class MainFrame extends JFrame {
         });
     }
 
+    /// Menu para alteração do apelido
     private void configureNickname() {
 
         this.changeNicknameItem
@@ -434,6 +445,7 @@ public class MainFrame extends JFrame {
                 );
     }
 
+    /// Informações sobre o projeto
     private void configureAboutEvent() {
 
         this.aboutItem.addActionListener(e -> {
@@ -452,6 +464,7 @@ public class MainFrame extends JFrame {
         });
     }
 
+    /// Acessa o backand para pesquisar série
     private void searchSeries()
             throws IOException, InterruptedException {
 
@@ -479,6 +492,7 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /// Atualiza todos os dados exibidos
     private void refreshLists() {
 
         this.refreshFavorites();
@@ -491,6 +505,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Atualiza a exibição de favoritos
     private void refreshFavorites() {
 
         favoritesModel.clear();
@@ -505,6 +520,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Atualiza a exibição de assistidos
     private void refreshWatched() {
 
         watchedModel.clear();
@@ -518,6 +534,7 @@ public class MainFrame extends JFrame {
         this.refreshWatchedStatistics();
     }
 
+    /// Atualiza a exibição de quero assistir
     private void refreshWantToWatch() {
 
         wantToWatchModel.clear();
@@ -531,6 +548,7 @@ public class MainFrame extends JFrame {
         this.refreshWantToWatchStatistics();
     }
 
+    /// Remove uma seria de uma coleção especifica, acessa o backand
     private void removeSelectedSerie()
             throws IOException {
 
@@ -600,6 +618,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Configura o evento de detalhes da serie
     private void configureSeriesDetailsEvent() {
 
         this.addDetailEvent(resultsList);
@@ -609,6 +628,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Adiciona as estatísticas do usuário
     private void addStatisticsPanel() {
 
         this.statisticsPanel = new JPanel();
@@ -648,6 +668,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Atualiza exibição do usuário
     private void refreshUserStatistics() {
 
         if (controller.getUserData().getUser() == null) {
@@ -663,6 +684,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Atualiza a contagen de favoritos
     private void refreshFavoritesStatistics() {
 
         favoritesCountLabel.setText(
@@ -671,6 +693,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Atualiza a contagen de assistidos
     private void refreshWatchedStatistics() {
 
         watchedCountLabel.setText(
@@ -679,6 +702,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Atualiza a contagen de quero assistir
     private void refreshWantToWatchStatistics() {
 
         wantToWatchCountLabel.setText(
@@ -687,6 +711,7 @@ public class MainFrame extends JFrame {
         );
     }
 
+    /// Configura evento de ordenação
     private void configureSortEvent() {
 
         sortComboBox.addActionListener(
@@ -695,6 +720,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Ordena a aba em exibição no momento
     private void sortCurrentTab() {
 
         int tab = tabbedPane.getSelectedIndex();
@@ -749,6 +775,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    /// Atualiza a exibição da uma aba
     private void updateCurrentTab(List<Serie> series) {
 
         int tab = tabbedPane.getSelectedIndex();
@@ -780,6 +807,7 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /// Instancia os menus de usuário e informações
     private void addMenuBar() {
 
         JMenuBar menuBar = new JMenuBar();
@@ -804,6 +832,7 @@ public class MainFrame extends JFrame {
         setJMenuBar(menuBar);
     }
 
+    /// Troca o apelido do usuário
     private void changeNickname()
             throws IOException {
 
