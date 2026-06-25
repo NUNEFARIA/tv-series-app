@@ -18,6 +18,11 @@ public class UserRepository {
                     .setPrettyPrinting()
                     .create();
 
+    /**
+    Lê o arquivo "User-data.json" ou, caso este
+    não exista ou esteja corrompido, cria um novo.
+    Retorna um objeto UserData.
+    */
     public UserData load() throws IOException {
 
         File file = new File(FILE_NAME);
@@ -31,8 +36,8 @@ public class UserRepository {
 
             UserData userData =
                     gson.fromJson(
-                        reader,
-                        UserData.class
+                            reader,
+                            UserData.class
                     );
 
             return userData != null
@@ -50,6 +55,10 @@ public class UserRepository {
         }
     }
 
+    /**
+     * Recebe um objeto UserData.
+     * Sobre escreve o arquivo "User-data.json"
+     */
     public void save(UserData userData)
             throws IOException {
 

@@ -18,6 +18,7 @@ public class UserService {
         this.userData = repository.load();
     }
 
+    /// Set the nickname
     public void setNickname(String nickname)
             throws IOException {
 
@@ -28,10 +29,12 @@ public class UserService {
         this.persist();
     }
 
+    /// Save user data in JSON
     private void persist() throws IOException {
         repository.save(userData);
     }
 
+    /// Add Serie to List
     public void addFavorite(Serie serie) throws IOException {
 
         if (!userData.getFavorites().contains(serie)) {
@@ -41,11 +44,6 @@ public class UserService {
 
         }
 
-    }
-
-    public void removeFavorite(Serie serie) throws IOException {
-        this.userData.removeFavorite(serie);
-        this.persist();
     }
 
     public void addWatched(Serie serie) throws IOException {
@@ -59,11 +57,6 @@ public class UserService {
 
     }
 
-    public void removeWatched(Serie serie) throws IOException {
-        this.userData.removeWatched(serie);
-        this.persist();
-    }
-
     public void addWantToWatch(Serie serie) throws IOException {
 
         if (!userData.getWantToWatch().contains(serie)) {
@@ -75,11 +68,23 @@ public class UserService {
 
     }
 
+    /// Remove serie from list
+    public void removeFavorite(Serie serie) throws IOException {
+        this.userData.removeFavorite(serie);
+        this.persist();
+    }
+
+    public void removeWatched(Serie serie) throws IOException {
+        this.userData.removeWatched(serie);
+        this.persist();
+    }
+
     public void removeWantToWatch(Serie serie) throws IOException {
         this.userData.removeWantToWatch(serie);
         this.persist();
     }
 
+    /// Show user data
     public UserData getUserData() {
         return this.userData;
     }

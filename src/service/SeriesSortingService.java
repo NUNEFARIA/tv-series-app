@@ -8,6 +8,7 @@ import java.util.List;
 
 public class SeriesSortingService {
 
+    /// Sort by name
     public List<Serie> sortByName(List<Serie> series) {
 
         List<Serie> sorted =
@@ -15,14 +16,15 @@ public class SeriesSortingService {
 
         sorted.sort(
                 Comparator.comparing(
-                Serie::getName,
-                String.CASE_INSENSITIVE_ORDER
+                        Serie::getName,
+                        String.CASE_INSENSITIVE_ORDER
                 )
         );
 
         return sorted;
     }
 
+    /// Sort by rating
     public List<Serie> sortByRating(List<Serie> series) {
 
         List<Serie> sorted =
@@ -37,6 +39,7 @@ public class SeriesSortingService {
         return sorted;
     }
 
+    /// Sort by premiered
     public List<Serie> sortByPremiered(List<Serie> series) {
 
         List<Serie> sorted =
@@ -52,6 +55,7 @@ public class SeriesSortingService {
         return sorted;
     }
 
+    /// Sort by status
     public List<Serie> sortByStatus(List<Serie> series) {
 
         List<Serie> sorted =

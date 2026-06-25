@@ -18,49 +18,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TvMazeAPIService {
-    
+
     private static final String BASE_URL = "https://api.tvmaze.com/search/shows?q=";
-    
+
+    /// Performs the API query
     public String searchByName(String serie) throws IOException, InterruptedException {
-        
+
         serie = serie.trim();
-        
+
         String query = URLEncoder.encode(
                 serie,
                 StandardCharsets.UTF_8
         );
-        
+
         HttpClient client = HttpClient.newHttpClient();
-        
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + query))
                 .GET()
                 .build();
-        
+
         HttpResponse<String> response = client.send(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
-        
+
         return response.body();
-        
+
     }
 
+    /// Processes the returned JSON
     public List<Serie> searchSeries(String name)
-            throws IOException, InterruptedException{
+            throws IOException, InterruptedException {
 
+        // Armazena o Json retornado
         String json = searchByName(name);
 
         Gson gson = new Gson();
 
         Type type =
-                new TypeToken<List<TvMazeSearchDTO>>(){}.getType();
+                new TypeToken<List<TvMazeSearchDTO>>() {
+                }.getType();
 
+        // Converte JSON em TvMazeSearchDTO
         List<TvMazeSearchDTO> results =
                 gson.fromJson(json, type);
 
         List<Serie> series = new ArrayList<>();
 
+        // Converte TvMazeSearchDTO em Objetos Serie
         for (TvMazeSearchDTO result : results) {
 
             ShowDTO show = result.getShow();
@@ -99,6 +105,7 @@ public class TvMazeAPIService {
             series.add(serie);
         }
 
+        // Retorna uma lista de series
         return series;
 
     }

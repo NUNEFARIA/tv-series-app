@@ -18,7 +18,7 @@ public class SerieDetailsDialog extends JDialog {
                 true
         );
 
-        setSize(500,400);
+        setSize(500, 400);
 
         setLocationRelativeTo(parent);
 

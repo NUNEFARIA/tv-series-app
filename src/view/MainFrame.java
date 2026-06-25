@@ -9,8 +9,8 @@ import java.util.List;
 
 public class MainFrame extends JFrame {
 
+    /// Attributes
     private final SeriesController controller;
-
     private JTextField searchField;
     private JButton searchButton;
     private JButton favoriteButton;
@@ -38,10 +38,13 @@ public class MainFrame extends JFrame {
     private JMenuItem changeNicknameItem;
     private JMenuItem aboutItem;
 
+    /// Constructor
     public MainFrame() throws IOException {
 
+        // Instacía backand
         this.controller = new SeriesController();
 
+        // Checa se usuário existe
         this.checkUser();
 
         this.initializeComponents();
@@ -67,6 +70,7 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
+    /// Checa se usuário existe, caso não, cria um
     private void checkUser() throws IOException {
 
         if (this.controller.getUserData().getUser() == null) {
@@ -75,7 +79,7 @@ public class MainFrame extends JFrame {
                     NicknameDialog.askNickname();
 
             if (nickname != null &&
-            !nickname.isBlank()) {
+                    !nickname.isBlank()) {
 
                 this.controller.setNickname(
                         nickname.trim()
@@ -87,14 +91,6 @@ public class MainFrame extends JFrame {
     private void initializeComponents() {
 
         String title = "TV Series APP";
-
-        if (controller.getUserData().getUser() != null) {
-
-            title += " - "
-                    + controller.getUserData()
-                    .getUser()
-                    .getNickName();
-        }
 
         setTitle(title);
 
@@ -117,7 +113,7 @@ public class MainFrame extends JFrame {
         this.searchPanel.add(this.searchField);
         this.searchPanel.add(this.searchButton);
 
-        this.sortComboBox = new JComboBox<>(new String[] {
+        this.sortComboBox = new JComboBox<>(new String[]{
                 "Nome",
                 "Nota",
                 "Status",
@@ -438,7 +434,7 @@ public class MainFrame extends JFrame {
                 );
     }
 
-    private  void configureAboutEvent() {
+    private void configureAboutEvent() {
 
         this.aboutItem.addActionListener(e -> {
 
@@ -667,7 +663,7 @@ public class MainFrame extends JFrame {
         );
     }
 
-    private void refreshFavoritesStatistics () {
+    private void refreshFavoritesStatistics() {
 
         favoritesCountLabel.setText(
                 "Favoritos: "
@@ -675,7 +671,7 @@ public class MainFrame extends JFrame {
         );
     }
 
-    private void refreshWatchedStatistics () {
+    private void refreshWatchedStatistics() {
 
         watchedCountLabel.setText(
                 "Assistidos: "
@@ -683,7 +679,7 @@ public class MainFrame extends JFrame {
         );
     }
 
-    private void refreshWantToWatchStatistics () {
+    private void refreshWantToWatchStatistics() {
 
         wantToWatchCountLabel.setText(
                 "Quero Assistir: "
@@ -818,7 +814,7 @@ public class MainFrame extends JFrame {
                 );
 
         if (nickname == null ||
-        nickname.isBlank()) {
+                nickname.isBlank()) {
 
             return;
         }
@@ -829,10 +825,6 @@ public class MainFrame extends JFrame {
 
         refreshUserStatistics();
 
-        setTitle(
-                "TV Series APP - "
-                + nickname.trim()
-        );
     }
 
 }

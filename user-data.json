@@ -1,8 +1,23 @@
 {
   "user": {
-    "nickName": "Nunes"
+    "nickName": "NUNES"
   },
-  "favorites": [],
+  "favorites": [
+    {
+      "id": 3863,
+      "name": "D-Day",
+      "language": "Korean",
+      "genres": [
+        "Drama",
+        "Medical"
+      ],
+      "average": 6.9,
+      "status": "Ended",
+      "premiered": "2015-09-18",
+      "ended": "2015-11-21",
+      "broadcaster": "jTBC"
+    }
+  ],
   "wantToWatch": [],
   "watched": []
 }

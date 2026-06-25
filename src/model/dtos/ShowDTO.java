@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ShowDTO {
 
+    // Attributes
     private int id;
     private String name;
     private String language;
@@ -15,8 +16,9 @@ public class ShowDTO {
     private String ended;
     private NetworkDTO network;
 
+    // Getters
     public int getId() {
-        return  id;
+        return id;
     }
 
     public String getName() {

@@ -12,10 +12,12 @@ import java.util.List;
 
 public class SeriesController {
 
+    // Attributes
     private final TvMazeAPIService apiService;
     private final UserService userService;
     private final SeriesSortingService sortingService;
 
+    // Constructor
     public SeriesController() throws IOException {
 
         this.apiService = new TvMazeAPIService();
@@ -27,31 +29,24 @@ public class SeriesController {
 
     }
 
-    ///  User
+    /// Set nickname
     public void setNickname(String nickname)
-        throws IOException {
+            throws IOException {
 
         this.userService.setNickname(nickname);
     }
 
-    /// Search series
+    /// search serie
     public List<Serie> searchSeries(String name)
             throws IOException, InterruptedException {
 
         return this.apiService.searchSeries(name);
     }
 
-    /// Favorites
-    public void addFavorite(Serie serie)
-            throws IOException {
+    /// Get data
+    public UserData getUserData() {
 
-        this.userService.addFavorite(serie);
-    }
-
-    public void removeFavorite(Serie serie)
-            throws IOException {
-
-        this.userService.removeFavorite(serie);
+        return userService.getUserData();
     }
 
     public List<Serie> getFavorite() {
@@ -59,11 +54,40 @@ public class SeriesController {
         return userService.getFavorites();
     }
 
-    /// Watched
+    public List<Serie> getWatched() {
+
+        return userService.getWatched();
+    }
+
+    public List<Serie> getWantToWatch() {
+
+        return userService.getWantToWatch();
+    }
+
+    /// Add serie
+    public void addFavorite(Serie serie)
+            throws IOException {
+
+        this.userService.addFavorite(serie);
+    }
+
     public void addWatched(Serie serie)
             throws IOException {
 
         this.userService.addWatched(serie);
+    }
+
+    public void addWantToWatch(Serie serie)
+            throws IOException {
+
+        this.userService.addWantToWatch(serie);
+    }
+
+    /// Remove serie
+    public void removeFavorite(Serie serie)
+            throws IOException {
+
+        this.userService.removeFavorite(serie);
     }
 
     public void removeWatched(Serie serie)
@@ -72,33 +96,10 @@ public class SeriesController {
         this.userService.removeWatched(serie);
     }
 
-    public List<Serie> getWatched() {
-
-        return userService.getWatched();
-    }
-
-    /// Want to watch
-    public void addWantToWatch(Serie serie)
-            throws IOException {
-
-        this.userService.addWantToWatch(serie);
-    }
-
     public void removeWantToWatch(Serie serie)
             throws IOException {
 
         this.userService.removeWantToWatch(serie);
-    }
-
-    public List<Serie> getWantToWatch() {
-
-        return userService.getWantToWatch();
-    }
-
-    /// User data
-    public UserData getUserData() {
-
-        return userService.getUserData();
     }
 
     /// Sort Series
